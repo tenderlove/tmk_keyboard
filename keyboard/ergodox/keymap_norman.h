@@ -53,7 +53,7 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     // SYMBOLS
     KEYMAP(
-           FN0,  F1,  F2,   F3,   F4,   F5,   TRNS,
+           FN0,  F1,  F2,   F3,   F4,   F5,   ESC,
            TRNS, MINS, EQL,  PPLS, PAST, SLSH, TRNS,
            FN22, GRV,  QUOT, FN11, DOT,  COMM,
            TRNS, FN12, FN13, FN14, FN15, FN16, TRNS,
@@ -74,7 +74,7 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     KEYMAP(  // Layer2: Mouse Left/ Arrows Right
         // left hand
-           NO,   NO,   BTN1, BTN2, BTN3, NO,   NO,
+           NO,   NO,   BTN1, BTN2, BTN3, NO,   ESC,
            NO,   NO,   WH_U, MS_U, WH_D, NO,   NO,
            NO,   NO,   MS_L, MS_D, MS_R, NO,
            NO,   NO,   BTN1, BTN2, BTN3, NO,   NO,
