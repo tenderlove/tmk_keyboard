@@ -27,7 +27,7 @@
 # make flip-ee = Download the eeprom file to the device, using Atmel FLIP
 #                (must have Atmel FLIP installed).
 #
-# make debug = Start either simulavr or avarice as specified for debugging, 
+# make debug = Start either simulavr or avarice as specified for debugging,
 #              with avr-gdb or avr-insight as the front end for debugging.
 #
 # make filename.s = Just compile filename.c into the assembler code only.
@@ -118,5 +118,7 @@ simon: all
 plover: OPT_DEFS += -DKEYMAP_PLOVER
 plover: all
 
-.DEFAULT_GOAL := simon
+norman: OPT_DEFS += -DKEYMAP_NORMAN
+norman: all
 
+.DEFAULT_GOAL := norman
