@@ -47,9 +47,9 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                       LCTL, LALT, END,
            //RIGHT
            TRNS, 6,    7,    8,    9,    0, MINS,
-           FN2,  J,    U,    R,    L,    SCLN, BSLS,
+           NO,  J,    U,    R,    L,    SCLN, BSLS,
                  Y,    N,    I,    O,    H, QUOT,
-           FN3,  P,    M,    COMM, DOT,  SLSH, RSFT,
+           FN2,  P,    M,    COMM, DOT,  SLSH, RSFT,
                        FN1,  FN10, LBRC, RBRC, RGUI,
            TRNS, TRNS,
            PGUP,
@@ -68,8 +68,8 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                      TRNS,
                                          TRNS, TRNS, TRNS,
         // right hand
-           TRNS, F6,   F7,   F8,   F9,   F10,   TRNS,
-           FN2,  FN23, FN24, LBRC, RBRC, BSLS, TRNS,
+           TRNS, F6,   F7,   F8,   F9,   F10,   F11,
+           FN3,  FN23, FN24, LBRC, RBRC, BSLS, F12,
                  FN25, FN26, FN20, FN21, FN27, FN30,
            FN4,  FN17, FN18, FN28, FN29, SCLN, TRNS,
                        TRNS, TRNS, TRNS, TRNS, TRNS,
@@ -79,7 +79,7 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     KEYMAP(  // Layer2: Mouse Left/ Arrows Right
         // left hand
-           NO,   NO,   BTN1, BTN2, BTN3, NO,   ESC,
+           NO,   NO,   BTN1, BTN2, BTN3, NO,   TRNS,
            NO,   NO,   WH_U, MS_U, WH_D, NO,   NO,
            NO,   NO,   MS_L, MS_D, MS_R, NO,
            NO,   NO,   BTN1, BTN2, BTN3, NO,   NO,
@@ -89,13 +89,13 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                          NO,   NO,   NO,
         // right hand
            NO,   NO,   BTN1, BTN2, BTN3, NO,   NO,
-           FN3,  INS,  HOME, UP,   PGUP, NO,   NO,
-                 DEL,  LEFT,  DOWN, RGHT, NO,   NO,
-           FN5,  NO,   END,  DOWN, PGDN, NO,   NO,
-                       NO,   NO,   NO,   NO,   NO,
+           FN5,  INS,  HOME, UP,   PGUP, NO,   NO,
+                 DEL,  LEFT, DOWN, RGHT, NO,   NO,
+           NO,   NO,   END,  DOWN, PGDN, NO,   NO,
+                       TRNS, TRNS, NO,   NO,   NO,
            NO,   NO,
            NO,
-           NO,   NO,   NO
+           NO,   TRNS,   NO
     ),
 
     /* KEYMAP(  // LayerN: fully transparent */
@@ -134,11 +134,11 @@ enum function_id {
  */
 static const uint16_t PROGMEM fn_actions[] = {
     ACTION_FUNCTION(TEENSY_KEY),                    // FN0  - Teensy key
-    ACTION_LAYER_MOMENTARY(2),                  // FN1 - Momentary L2
-    ACTION_LAYER_SET(0, ON_BOTH),                   // FN2 - Layer 0
-    ACTION_LAYER_SET(1, ON_BOTH),                   // FN3 - Layer 1
-    ACTION_LAYER_SET(2, ON_BOTH),                   // FN4 - Layer 2
-    ACTION_LAYER_SET(3, ON_BOTH),                   // FN5 - Layer 3
+    ACTION_LAYER_MOMENTARY(2),                      // FN1 - Momentary L2
+    ACTION_LAYER_ON(1, ON_RELEASE),                 // FN2 - Layer 1 ON
+    ACTION_LAYER_OFF(1, ON_RELEASE),                // FN3 - Layer 1 OFF
+    ACTION_LAYER_ON(2, ON_RELEASE),                 // FN4 - Layer 2 ON
+    ACTION_LAYER_OFF(2, ON_RELEASE),                // FN5 - Layer 2 OFF
     ACTION_LAYER_SET(4, ON_BOTH),                   // FN6 - Layer 4
     ACTION_LAYER_SET(5, ON_BOTH),                   // FN7 - Layer 5
     ACTION_LAYER_SET(6, ON_BOTH),                   // FN8 - Layer 6
