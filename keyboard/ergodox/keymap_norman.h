@@ -44,7 +44,7 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
                                             LEFT,  RGHT,
                                                   HOME,
-                                      LCTL, LALT, END,
+                                      FN9, LALT, END,
            //RIGHT
            TRNS, 6,    7,    8,    9,    0, MINS,
            NO,  J,    U,    R,    L,    SCLN, BSLS,
@@ -142,7 +142,8 @@ static const uint16_t PROGMEM fn_actions[] = {
     ACTION_LAYER_SET(4, ON_BOTH),                   // FN6 - Layer 4
     ACTION_LAYER_SET(5, ON_BOTH),                   // FN7 - Layer 5
     ACTION_LAYER_SET(6, ON_BOTH),                   // FN8 - Layer 6
-    ACTION_LAYER_SET(7, ON_BOTH),                   // FN9 - Layer 7
+    //#    ACTION_LAYER_TAP_KEY(KC_LCTL, KC_ESC),        // FN9 - Control/esc on tap
+    ACTION_MODS_TAP_KEY(MOD_LCTL, KC_ESC),        // FN9 - Control/esc on tap
     ACTION_LAYER_MOMENTARY(1),                      // FN10 - Momentary Layer 1
 
     // SYMBOLS
@@ -168,7 +169,7 @@ static const uint16_t PROGMEM fn_actions[] = {
     ACTION_MODS_KEY(MOD_LSFT, KC_SLSH),             // FN30 - ?
 
     // Fancy tapping/toggling
-    ACTION_LAYER_TAP_KEY(1, KC_T),                  // FN31 - Layer 1 when holding T key
+    ACTION_LAYER_TAP_KEY(1, KC_T),                  // FN3 - Layer 1 when holding T key
 
 
 };
