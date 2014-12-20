@@ -37,9 +37,9 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     KEYMAP(
            EQL,  1,    2,    3,    4,    5, ESC,
-           TAB,  Q,    W,    D,    F,    K, NO,
+           TAB,  Q,    W,    D,    F,    K, FN2,
            LCTL, A,    S,    E,    T,    G,
-           LSFT, Z,    X,    C,    V,    B, FN2,
+           LSFT, Z,    X,    C,    V,    B, NO,
            GRV,  FN10, FN1, LALT, LGUI,
 
                                             TRNS,  TRNS,
@@ -59,9 +59,9 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // SYMBOLS
     KEYMAP(
            FN0,  F1,  F2,   F3,   F4,   F5,   ESC,
-           TRNS, MINS, EQL,  PPLS, PAST, SLSH, TRNS,
+           TRNS, MINS, EQL,  PPLS, PAST, SLSH, FN4,
            FN22, GRV,  QUOT, FN11, DOT,  COMM,
-           TRNS, FN12, FN13, FN14, FN15, FN16, TRNS,
+           TRNS, FN12, FN13, FN14, FN15, FN16, FN2,
            TRNS, TRNS, TRNS, TRNS, TRNS,
 
                                                TRNS, TRNS,
@@ -82,7 +82,7 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
            NO,   NO,   BTN1, BTN2, BTN3, NO,   TRNS,
            NO,   NO,   WH_U, MS_U, WH_D, NO,   NO,
            NO,   NO,   MS_L, MS_D, MS_R, NO,
-           NO,   NO,   BTN1, BTN2, BTN3, NO,   NO,
+           NO,   NO,   BTN1, BTN2, BTN3, NO,   FN4,
            NO,   NO,   NO,   NO,   NO,
                                                NO,   NO,
                                                      NO,
