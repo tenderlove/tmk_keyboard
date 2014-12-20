@@ -137,8 +137,8 @@ static const uint16_t PROGMEM fn_actions[] = {
     ACTION_LAYER_MOMENTARY(2),                      // FN1 - Momentary L2
     ACTION_LAYER_TOGGLE(1),                 // FN2 - Layer 1 ON
     ACTION_LAYER_TOGGLE(1),                // FN3 - Layer 1 OFF
-    ACTION_LAYER_ON(2, ON_RELEASE),                 // FN4 - Layer 2 ON
-    ACTION_LAYER_OFF(2, ON_RELEASE),                // FN5 - Layer 2 OFF
+    ACTION_LAYER_TOGGLE(2),                 // FN4 - Layer 2 ON
+    ACTION_LAYER_TOGGLE(2),                // FN5 - Layer 2 OFF
     ACTION_LAYER_SET(4, ON_BOTH),                   // FN6 - Layer 4
     ACTION_LAYER_SET(5, ON_BOTH),                   // FN7 - Layer 5
     ACTION_LAYER_SET(6, ON_BOTH),                   // FN8 - Layer 6
