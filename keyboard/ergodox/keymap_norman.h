@@ -40,7 +40,7 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
            TAB,  Q,    W,    D,    F,    K, FN2,
            LCTL, A,    S,    E,    T,    G,
            LSFT, Z,    X,    C,    V,    B, NO,
-           GRV,  FN10, FN1, LALT, LGUI,
+           GRV,  FN10, FN10, LALT, LGUI,
 
                                             FN20,  FN21,
                                                   HOME,
@@ -50,7 +50,7 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
            UP,  J,    U,    R,    L,    SCLN, BSLS,
                  Y,    N,    I,    O,    H, QUOT,
            DOWN,  P,    M,    COMM, DOT,  SLSH, RSFT,
-                       RGUI, FN1,  FN10, LBRC, RBRC,
+                       FN10, MINS,  FN10, LBRC, RBRC,
            LEFT, RIGHT,
            PGUP,
            PGDN, FN9, BSPC
@@ -69,10 +69,10 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                          TRNS, TRNS, TRNS,
         // right hand
            TRNS, F6,   F7,   F8,   F9,   F10,   F11,
-           FN2,  FN23, FN24, LBRC, RBRC, BSLS, F12,
-                 FN25, FN26, FN20, FN21, FN27, FN30,
-           FN4,  FN17, FN18, FN28, FN29, SCLN, TRNS,
-                       TRNS, TRNS, TRNS, TRNS, TRNS,
+           UP,    UP,       7,   8,    9,    FN19, F12,
+                  DOWN,     4,   5,    6,    FN31, FN30,
+           DOWN,  FN18,     1,   2,    3,    BSLS, TRNS,
+                        TRNS,  DOT,    0,    EQL, TRNS,
            TRNS, TRNS,
            TRNS,
            TRNS, TRNS, TRNS
@@ -167,6 +167,7 @@ static const uint16_t PROGMEM fn_actions[] = {
     ACTION_MODS_KEY(MOD_LSFT, KC_LBRC),             // FN28 - {
     ACTION_MODS_KEY(MOD_LSFT, KC_RBRC),             // FN29 - }
     ACTION_MODS_KEY(MOD_LSFT, KC_SLSH),             // FN30 - ?
+    ACTION_MODS_KEY(MOD_LSFT, KC_EQL),              // FN31 - +
 
     // Fancy tapping/toggling
     ACTION_LAYER_TAP_KEY(1, KC_T),                  // FN3 - Layer 1 when holding T key
