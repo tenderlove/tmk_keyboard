@@ -2,11 +2,11 @@
 #include <avr/wdt.h> // for wdt_enable
 
 const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  /* 0: qwerty */
-  KEYMAP(Q,   W,   E,   R,   T,  Y,    U,   I,   O,   P, \
-         A,   S,   D,   F,   G,  H,    J,   K,   L,   SCLN, \
-         Z,   X,   C,   V,   B,  LALT, N,   M,  COMM, DOT, SLSH, \
-         ESC, TAB, LGUI, LSFT, BSPC, LCTL, SPC, FN0, PGUP, PGDN, ENT),
+  /* 0: Norman */
+  KEYMAP(Q,   W,   D,   F,   K,  J,    U,   R,   L,   SCLN, \
+         A,   S,   E,   T,   G,  Y,    N,   I,   O,   H, \
+         Z,   X,   C,   V,   B,  FN20, P,   M,  COMM, DOT, QUOT, \
+         LSFT, TAB, LALT, LGUI, SPC, ENT, BSPC, FN0, UP, DOWN, RSFT),
   /* 1: fn with software-dvorak-ized punctuation */
   KEYMAP(1, 2, 3, 4, 5, 6, 7, 8, 9, 0, \
          MINS, FN1, FN2, FN3, RBRC, LBRC, MINS, EQL, FN4, FN5, \
@@ -65,4 +65,5 @@ const uint16_t PROGMEM fn_actions[] = {
 
   // other
   [19] = ACTION_FUNCTION(BOOTLOADER),
+  [20] = ACTION_MODS_TAP_KEY(MOD_LCTL, KC_ESC),          // FN27 - Control/esc on tap
 };
