@@ -3,15 +3,16 @@
 
 const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /* 0: Norman */
-  KEYMAP(Q,   W,   D,   F,   K,  J,    U,   R,   L,   SCLN, \
-         A,   S,   E,   T,   G,  Y,    N,   I,   O,   H, \
-         Z,   X,   C,   V,   B,  FN20, P,   M,  COMM, DOT, QUOT, \
-         LSFT, TAB, LALT, LGUI, SPC, ENT, BSPC, FN0, UP, DOWN, RSFT),
+  KEYMAP(Q,    W,   D,    F,     K,               J,    U,    R,    L,    SCLN, \
+         A,    S,   E,    T,     G,               Y,    N,    I,    O,    H, \
+         Z,    X,   C,    V,     B,         FN20, P,    M,    COMM, DOT, QUOT, \
+         LSFT, TAB, LALT, LGUI,  SPC,  ENT,       BSPC, FN0,  UP,   DOWN, RSFT),
+
   /* 1: fn with software-dvorak-ized punctuation */
-  KEYMAP(1, 2, 3, 4, 5, 6, 7, 8, 9, 0, \
-         MINS, FN1, FN2, FN3, RBRC, LBRC, MINS, EQL, FN4, FN5, \
-         FN6, FN7, FN8, FN9, FN10, TRNS, FN11, FN12, FN13, FN15, FN14,  \
-         FN19, FN18, TRNS, TRNS, GRV, TRNS, TRNS, TRNS, FN16, FN17, BSLS ) \
+  KEYMAP(1,    2,    3,    4,    5,               6,    7,    8,    9,    0, \
+         MINS, FN1,  FN2,  FN3,  RBRC,            LBRC, MINS, EQL,  FN4,  FN5, \
+         FN6,  FN7,  FN8,  FN9,  FN10,      TRNS, FN11, FN12, FN13, FN15, FN14,  \
+         FN19, FN18, TRNS, TRNS, GRV,  TRNS,      TRNS, TRNS, FN16, FN17, BSLS ) \
 };
 
 enum function_id {
