@@ -38,6 +38,8 @@
 # To rebuild project do "make clean" then "make all".
 #----------------------------------------------------------------------------
 
+USB ?= /dev/cu.usbmodem1421
+
 # Target file name (without extension).
 TARGET = atreus
 
@@ -131,6 +133,10 @@ OPT_DEFS += -DNO_SUSPEND_POWER_DOWN
 # Search Path
 VPATH += $(TARGET_DIR)
 VPATH += $(TOP_DIR)
+
+upload: $(TARGET).hex
+	while [ ! -r $(USB) ]; do sleep 1; done; \
+	avrdude -p $(MCU) -c avr109 -U flash:w:$(TARGET).hex -P $(USB)
 
 include $(TOP_DIR)/protocol/lufa.mk
 include $(TOP_DIR)/common.mk
