@@ -11,7 +11,7 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /* 1: fn with software-dvorak-ized punctuation */
   KEYMAP(FN6,  FN7,  FN4,  FN5,  FN17,            UP,   7,    8,    9,  FN8, \
          FN8,  FN9,  FN2,  FN3,  GRV,             DOWN, 4,    5,    6,  FN1, \
-         FN10, FN11, LBRC, RBRC, FN15,      TRNS, HAT,  1,    2,    3, BSLS,  \
+         FN10, FN11, LBRC, RBRC, FN15,      TRNS, FN11, 1,    2,    3, BSLS,  \
          FN19, FN18, MINS, FN16, TRNS, TRNS,      TRNS, TRNS, DOT,  0, EQL ) \
 };
 
