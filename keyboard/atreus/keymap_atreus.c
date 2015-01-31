@@ -11,8 +11,8 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /* 1: fn with software-dvorak-ized punctuation */
   KEYMAP(FN6,  FN7,  FN4,  FN5,  FN17,            UP,   7,    8,    9,  FN8, \
          FN8,  FN9,  FN2,  FN3,  GRV,             DOWN, 4,    5,    6,  FN1, \
-         FN10, FN11, LBRC, RBRC, FN15,      TRNS, FN11, 1,    2,    3, BSLS,  \
-         FN19, FN18, MINS, FN16, TRNS, TRNS,      TRNS, TRNS, DOT,  0, EQL ) \
+         FN10, FN11, LBRC, RBRC, FN15,      TRNS, FN11, 1,    2,    3,  MINS,  \
+         FN19, FN18, FN16, TRNS, TRNS, TRNS,      TRNS, TRNS, DOT,  0,  EQL ) \
 };
 
 enum function_id {
@@ -38,7 +38,7 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt)
 
 // looks like all normally-shifted keys need to be listed here
 const uint16_t PROGMEM fn_actions[] = {
-  [0] = ACTION_LAYER_MOMENTARY(1),  // to Fn overlay
+  [0] = ACTION_LAYER_TAP_TOGGLE(1),  // to Fn overlay
 
   // row 1
   [1] = ACTION_MODS_KEY(MOD_LSFT, KC_EQL),  // +
