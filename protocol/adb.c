@@ -128,6 +128,10 @@ uint16_t adb_host_kbd_recv(void)
     attention();
     send_byte(0x2C);            // Addr:Keyboard(0010), Cmd:Talk(11), Register0(00)
     place_bit0();               // Stopbit(0)
+    if (!wait_data_hi(500)) {    // Service Request(310us Adjustable Keyboard): just ignored
+        sei();
+        return -30;             // something wrong
+    }
     if (!wait_data_lo(500)) {   // Tlt/Stop to Start(140-260us)
         sei();
         return 0;               // No data to send
@@ -356,7 +360,7 @@ Commands
     3:  mice
 
     Registers:
-    0: application(keyobard uses this to store its data.)
+    0: application(keyboard uses this to store its data.)
     1: application
     2: application(keyboard uses this for LEDs and state of modifiers)
     3: status and command

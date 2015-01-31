@@ -15,7 +15,6 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include <stdint.h>
-#include <util/delay.h>
 #include "keyboard.h"
 #include "matrix.h"
 #include "keymap.h"
@@ -36,6 +35,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #endif
 #ifdef PS2_MOUSE_ENABLE
 #   include "ps2_mouse.h"
+#endif
+#ifdef SERIAL_MOUSE_ENABLE
+#include "serial_mouse.h"
 #endif
 
 
@@ -64,6 +66,10 @@ void keyboard_init(void)
 #ifdef PS2_MOUSE_ENABLE
     ps2_mouse_init();
 #endif
+#ifdef SERIAL_MOUSE_ENABLE
+    serial_mouse_init();
+#endif
+
 
 #ifdef BOOTMAGIC_ENABLE
     bootmagic();
@@ -100,7 +106,7 @@ void keyboard_task(void)
             for (uint8_t c = 0; c < MATRIX_COLS; c++) {
                 if (matrix_change & ((matrix_row_t)1<<c)) {
                     action_exec((keyevent_t){
-                        .key = (key_t){ .row = r, .col = c },
+                        .key = (keypos_t){ .row = r, .col = c },
                         .pressed = (matrix_row & ((matrix_row_t)1<<c)),
                         .time = (timer_read() | 1) /* time should not be 0 */
                     });
@@ -124,6 +130,10 @@ MATRIX_LOOP_END:
 
 #ifdef PS2_MOUSE_ENABLE
     ps2_mouse_task();
+#endif
+
+#ifdef SERIAL_MOUSE_ENABLE
+        serial_mouse_task();
 #endif
 
     // update LED

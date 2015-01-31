@@ -269,7 +269,7 @@ Default Layer is a layer which always is valid and referred to when actions is n
 
 This sets Default Layer to given parameter `layer` and activate it.
 
-    ACTION_DEFAULT_LAYER(layer)
+    ACTION_DEFAULT_LAYER_SET(layer)
 
 
 #### 2.2.2 Momentary 
@@ -444,6 +444,10 @@ Step through backlight levels.
 
     ACTION_BACKLIGHT_STEP()
 
+Turn a specific backlight level on or off.
+
+    ACTION_BACKLIGHT_LEVEL(1)
+
 #### 2.5.2 Turn on / off backlight
 Turn the backlight on and off without changing level.
 
@@ -490,6 +494,13 @@ This switches layer only while holding a key but toggle layer with several taps.
     ACTION_LAYER_TAP_TOGGLE(1)
 
 Number of taps can be configured with `TAPPING_TOGGLE` in `config.h`, `5` by default.
+
+
+
+### 3.5 Momentary switching with Modifiers
+This registers modifier key(s) simultaneously with layer switching.
+
+    ACTION_LAYER_MODS(2, MOD_LSFT | MOD_LALT)
 
 
 

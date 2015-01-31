@@ -35,6 +35,10 @@ typedef  uint32_t   matrix_row_t;
 #define MATRIX_IS_ON(row, col)  (matrix_get_row(row) && (1<<col))
 
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* number of matrix rows */
 uint8_t matrix_rows(void);
 /* number of matrix columns */
@@ -48,9 +52,17 @@ bool matrix_is_modified(void) __attribute__ ((deprecated));
 /* whether a swtich is on */
 bool matrix_is_on(uint8_t row, uint8_t col);
 /* matrix state on row */
-matrix_row_t  matrix_get_row(uint8_t row);
+matrix_row_t matrix_get_row(uint8_t row);
 /* print matrix for debug */
 void matrix_print(void);
 
+
+/* power control */
+void matrix_power_up(void);
+void matrix_power_down(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
