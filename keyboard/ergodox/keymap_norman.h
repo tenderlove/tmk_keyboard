@@ -37,31 +37,31 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     KEYMAP(
            EQL,  1,    2,    3,    4,    5, ESC,
-           TAB,  Q,    W,    D,    F,    K, FN2,
+           TAB,  Q,    W,    D,    F,    K, FN1,
            LCTL, A,    S,    E,    T,    G,
            LSFT, Z,    X,    C,    V,    B, NO,
-           GRV,  FN10, FN10, LALT, LGUI,
+           GRV,  FN4, TAB, LALT, LGUI,
 
-                                            FN20,  FN21,
-                                                  HOME,
+                                            NO,  NO,
+                                                HOME,
                                       SPC, ENT, MINS,
            //RIGHT
-           TRNS, 6,    7,    8,    9,    0, MINS,
-           UP,  J,    U,    R,    L,    SCLN, BSLS,
+           NO,   6,    7,    8,    9,    0, MINS,
+           UP,   J,    U,    R,    L,    SCLN, BSLS,
                  Y,    N,    I,    O,    H, QUOT,
-           DOWN,  P,    M,    COMM, DOT,  SLSH, RSFT,
-                       FN10, MINS,  FN10, LBRC, RBRC,
+           DOWN, P,    M,    COMM, DOT,  SLSH, RSFT,
+                       RGUI, MINS,  FN4, LBRC, RBRC,
            LEFT, RIGHT,
            PGUP,
-           PGDN, FN9, BSPC
+           PGDN, FN27, BSPC
            ),
 
     // SYMBOLS
     KEYMAP(
-           FN0,  F1,  F2,   F3,   F4,   F5,   ESC,
-           TRNS, MINS, EQL,  PPLS, PAST, SLSH, FN4,
-           FN22, GRV,  QUOT, FN11, DOT,  COMM,
-           TRNS, FN12, FN13, FN14, FN15, FN16, FN2,
+           FN0,  F1,   F2,   F3,   F4,   F5,   ESC,
+           TRNS, FN7,  FN8,  FN23, FN24, FN18, FN2,
+           FN22, FN9,  FN10, FN15, FN16, GRV,
+           TRNS, FN11, FN12, LBRC, RBRC, FN17, FN1,
            TRNS, TRNS, TRNS, TRNS, TRNS,
 
                                                TRNS, TRNS,
@@ -69,9 +69,9 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                          TRNS, TRNS, TRNS,
         // right hand
            TRNS, F6,   F7,   F8,   F9,   F10,   F11,
-           UP,    UP,       7,   8,    9,    FN19, F12,
-                  DOWN,     4,   5,    6,    FN31, FN30,
-           DOWN,  FN18,     1,   2,    3,    BSLS, TRNS,
+           UP,    UP,       7,   8,    9,    FN14, F12,
+                  DOWN,     4,   5,    6,    FN26, FN30,
+           DOWN,  FN13,     1,   2,    3,    BSLS, TRNS,
                         TRNS,  DOT,    0,    EQL, TRNS,
            TRNS, TRNS,
            TRNS,
@@ -133,41 +133,39 @@ enum function_id {
  * Fn action definition
  */
 static const uint16_t PROGMEM fn_actions[] = {
-    ACTION_FUNCTION(TEENSY_KEY),                    // FN0  - Teensy key
-    ACTION_LAYER_MOMENTARY(2),                      // FN1 - Momentary L2
-    ACTION_LAYER_TOGGLE(1),                 // FN2 - Layer 1 ON
-    ACTION_LAYER_TOGGLE(1),                // FN3 - Layer 1 OFF
-    ACTION_LAYER_TOGGLE(2),                 // FN4 - Layer 2 ON
-    ACTION_LAYER_TOGGLE(2),                // FN5 - Layer 2 OFF
-    ACTION_LAYER_SET(4, ON_BOTH),                   // FN6 - Layer 4
-    ACTION_LAYER_SET(5, ON_BOTH),                   // FN7 - Layer 5
-    ACTION_LAYER_SET(6, ON_BOTH),                   // FN8 - Layer 6
-    //#    ACTION_LAYER_TAP_KEY(KC_LCTL, KC_ESC),        // FN9 - Control/esc on tap
-    ACTION_MODS_TAP_KEY(MOD_LCTL, KC_ESC),        // FN9 - Control/esc on tap
-    ACTION_LAYER_MOMENTARY(1),                      // FN10 - Momentary Layer 1
+    [0] = ACTION_FUNCTION(TEENSY_KEY),                    // FN0  - Teensy key
+    [1] = ACTION_LAYER_TOGGLE(1),                         // FN1 - Toggle 1
+    [2] = ACTION_LAYER_TOGGLE(2),                         // FN2 - Toggle 2
+    [3] = ACTION_LAYER_TOGGLE(3),                         // FN3 - Toggle 3
+    [4] = ACTION_LAYER_TAP_TOGGLE(1),                     // FN4 - Momentary Layer 1
+    [5] = ACTION_LAYER_MOMENTARY(2),                      // FN5 - Momentary L2
 
     // SYMBOLS
-    ACTION_MODS_KEY(MOD_LSFT, KC_QUOT),             // FN11 - "
-    ACTION_MODS_KEY(MOD_LSFT, KC_1),                // FN12 - !
-    ACTION_MODS_KEY(MOD_LSFT, KC_2),                // FN13 - @
-    ACTION_MODS_KEY(MOD_LSFT, KC_3),                // FN14 - #
-    ACTION_MODS_KEY(MOD_LSFT, KC_4),                // FN15 - $
-    ACTION_MODS_KEY(MOD_LSFT, KC_5),                // FN16 - %
-    ACTION_MODS_KEY(MOD_LSFT, KC_6),                // FN17 - ^
-    ACTION_MODS_KEY(MOD_LSFT, KC_7),                // FN18 - &
-    ACTION_MODS_KEY(MOD_LSFT, KC_8),                // FN19 - *
-    ACTION_MODS_KEY(MOD_LSFT, KC_9),                // FN20 - (
-    ACTION_MODS_KEY(MOD_LSFT, KC_0),                // FN21 - )
-    ACTION_MODS_KEY(MOD_LSFT, KC_GRV),              // FN22 - ~
-    ACTION_MODS_KEY(MOD_LSFT, KC_BSLS),             // FN23 - |
-    ACTION_MODS_KEY(MOD_LSFT, KC_MINS),             // FN24 - _
-    ACTION_MODS_KEY(MOD_LSFT, KC_COMM),             // FN25 - <
-    ACTION_MODS_KEY(MOD_LSFT, KC_DOT),              // FN26 - >
-    ACTION_MODS_KEY(MOD_LSFT, KC_SCLN),             // FN27 - :
-    ACTION_MODS_KEY(MOD_LSFT, KC_LBRC),             // FN28 - {
-    ACTION_MODS_KEY(MOD_LSFT, KC_RBRC),             // FN29 - }
-    ACTION_MODS_KEY(MOD_LSFT, KC_SLSH),             // FN30 - ?
-    ACTION_MODS_KEY(MOD_LSFT, KC_EQL),              // FN31 - +
+    ACTION_MODS_KEY(MOD_LSFT, KC_QUOT),             // FN6 - "
+    ACTION_MODS_KEY(MOD_LSFT, KC_1),                // FN7 - !
+    ACTION_MODS_KEY(MOD_LSFT, KC_2),                // FN8 - @
+    ACTION_MODS_KEY(MOD_LSFT, KC_3),                // FN9 - #
+    ACTION_MODS_KEY(MOD_LSFT, KC_4),                // FN10 - $
+    ACTION_MODS_KEY(MOD_LSFT, KC_5),                // FN11 - %
+    ACTION_MODS_KEY(MOD_LSFT, KC_6),                // FN12 - ^
+    ACTION_MODS_KEY(MOD_LSFT, KC_7),                // FN13 - &
+    ACTION_MODS_KEY(MOD_LSFT, KC_8),                // FN14 - *
+    ACTION_MODS_KEY(MOD_LSFT, KC_9),                // FN15 - (
+    ACTION_MODS_KEY(MOD_LSFT, KC_0),                // FN16 - )
+    ACTION_MODS_KEY(MOD_LSFT, KC_GRV),              // FN17 - ~
+    ACTION_MODS_KEY(MOD_LSFT, KC_BSLS),             // FN18 - |
+    ACTION_MODS_KEY(MOD_LSFT, KC_MINS),             // FN19 - _
+    ACTION_MODS_KEY(MOD_LSFT, KC_COMM),             // FN20 - <
+    ACTION_MODS_KEY(MOD_LSFT, KC_DOT),              // FN21 - >
+    ACTION_MODS_KEY(MOD_LSFT, KC_SCLN),             // FN22 - :
+    ACTION_MODS_KEY(MOD_LSFT, KC_LBRC),             // FN23 - {
+    ACTION_MODS_KEY(MOD_LSFT, KC_RBRC),             // FN24 - }
+    ACTION_MODS_KEY(MOD_LSFT, KC_SLSH),             // FN25 - ?
+    ACTION_MODS_KEY(MOD_LSFT, KC_EQL),              // FN26 - +
+
+    ACTION_MODS_TAP_KEY(MOD_LCTL, KC_ESC),          // FN27 - Control/esc on tap
+    ACTION_MODS_TAP_KEY(MOD_LSFT, KC_Z),            // FN28 - Control/esc on tap
+    ACTION_MODS_TAP_KEY(MOD_LCTL, KC_A),            // FN28 - Control/esc on tap
 
     // Fancy tapping/toggling
     ACTION_LAYER_TAP_KEY(1, KC_T),                  // FN3 - Layer 1 when holding T key
