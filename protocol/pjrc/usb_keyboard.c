@@ -39,7 +39,7 @@ uint8_t keyboard_protocol=1;
 // the idle configuration, how often we send the report to the
 // host (ms * 4) even when it hasn't changed
 // Windows and Linux set 0 while OS X sets 6(24ms) by SET_IDLE request.
-uint8_t keyobard_idle=125;
+uint8_t keyboard_idle=125;
 
 // count until idle timeout
 uint8_t usb_keyboard_idle_count=0;
@@ -74,7 +74,7 @@ void usb_keyboard_print_report(report_keyboard_t *report)
 {
     if (!debug_keyboard) return;
     print("keys: ");
-    for (int i = 0; i < REPORT_KEYS; i++) { phex(report->keys[i]); print(" "); }
+    for (int i = 0; i < KEYBOARD_REPORT_KEYS; i++) { phex(report->keys[i]); print(" "); }
     print(" mods: "); phex(report->mods); print("\n");
 }
 

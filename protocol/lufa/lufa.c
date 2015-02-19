@@ -148,18 +148,38 @@ static void Console_Task(void)
 */
 void EVENT_USB_Device_Connect(void)
 {
+    print("[C]");
+    /* For battery powered device */
+    if (!USB_IsInitialized) {
+        USB_Disable();
+        USB_Init();
+        USB_Device_EnableSOFEvents();
+    }
 }
 
 void EVENT_USB_Device_Disconnect(void)
 {
+    print("[D]");
+    /* For battery powered device */
+    USB_IsInitialized = false;
+/* TODO: This doesn't work. After several plug in/outs can not be enumerated. 
+    if (USB_IsInitialized) {
+        USB_Disable();  // Disable all interrupts
+	USB_Controller_Enable();
+        USB_INT_Enable(USB_INT_VBUSTI);
+    }
+*/
 }
 
 void EVENT_USB_Device_Reset(void)
 {
+    print("[R]");
 }
 
 void EVENT_USB_Device_Suspend()
 {
+    print("[S]");
+    matrix_power_down();
 #ifdef SLEEP_LED_ENABLE
     sleep_led_enable();
 #endif
@@ -167,6 +187,7 @@ void EVENT_USB_Device_Suspend()
 
 void EVENT_USB_Device_WakeUp()
 {
+    print("[W]");
     suspend_wakeup_init();
 
 #ifdef SLEEP_LED_ENABLE
@@ -476,37 +497,28 @@ int8_t sendchar(uint8_t c)
     uint8_t ep = Endpoint_GetCurrentEndpoint();
     Endpoint_SelectEndpoint(CONSOLE_IN_EPNUM);
     if (!Endpoint_IsEnabled() || !Endpoint_IsConfigured()) {
-        Endpoint_SelectEndpoint(ep);
-        return -1;
+        goto ERROR_EXIT;
     }
 
     if (timeouted && !Endpoint_IsReadWriteAllowed()) {
-        Endpoint_SelectEndpoint(ep);
-        return - 1;
+        goto ERROR_EXIT;
     }
 
     timeouted = false;
 
     uint8_t timeout = SEND_TIMEOUT;
-    uint16_t prevFN = USB_Device_GetFrameNumber();
     while (!Endpoint_IsReadWriteAllowed()) {
-        switch (USB_DeviceState) {
-        case DEVICE_STATE_Unattached:
-        case DEVICE_STATE_Suspended:
-            return -1;
+        if (USB_DeviceState != DEVICE_STATE_Configured) {
+            goto ERROR_EXIT;
         }
         if (Endpoint_IsStalled()) {
-            Endpoint_SelectEndpoint(ep);
-            return -1;
+            goto ERROR_EXIT;
         }
-        if (prevFN != USB_Device_GetFrameNumber()) {
-            if (!(timeout--)) {
-                timeouted = true;
-                Endpoint_SelectEndpoint(ep);
-                return -1;
-            }
-            prevFN = USB_Device_GetFrameNumber();
+        if (!(timeout--)) {
+            timeouted = true;
+            goto ERROR_EXIT;
         }
+        _delay_ms(1);
     }
 
     Endpoint_Write_8(c);
@@ -517,6 +529,9 @@ int8_t sendchar(uint8_t c)
 
     Endpoint_SelectEndpoint(ep);
     return 0;
+ERROR_EXIT:
+    Endpoint_SelectEndpoint(ep);
+    return -1;
 }
 #else
 int8_t sendchar(uint8_t c)
@@ -574,6 +589,7 @@ int main(void)
     print("Keyboard start.\n");
     while (1) {
         while (USB_DeviceState == DEVICE_STATE_Suspended) {
+            print("[s]");
             suspend_power_down();
             if (USB_Device_RemoteWakeupEnabled && suspend_wakeup_condition()) {
                     USB_Device_SendRemoteWakeup();

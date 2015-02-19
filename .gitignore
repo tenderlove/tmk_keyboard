@@ -9,4 +9,6 @@
 *.sym
 *.swp
 tags
-keymap_simon_passwords.h
+*~
+build/
+*.bak

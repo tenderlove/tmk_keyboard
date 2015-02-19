@@ -61,6 +61,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* supplement for Bluegiga iWRAP HID(not supported by Windows?) */
 #define AL_LOCK                 0x019E
 #define TRANSPORT_RECORD        0x00B2
+#define TRANSPORT_FAST_FORWARD  0x00B3
 #define TRANSPORT_REWIND        0x00B4
 #define TRANSPORT_EJECT         0x00B8
 #define AC_MINIMIZE             0x0206
@@ -74,19 +75,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* key report size(NKRO or boot mode) */
 #if defined(PROTOCOL_PJRC) && defined(NKRO_ENABLE)
 #   include "usb.h"
-#   define REPORT_SIZE KBD2_SIZE
-#   define REPORT_KEYS (KBD2_SIZE - 2)
-#   define REPORT_BITS (KBD2_SIZE - 1)
+#   define KEYBOARD_REPORT_SIZE KBD2_SIZE
+#   define KEYBOARD_REPORT_KEYS (KBD2_SIZE - 2)
+#   define KEYBOARD_REPORT_BITS (KBD2_SIZE - 1)
 
 #elif defined(PROTOCOL_LUFA) && defined(NKRO_ENABLE)
 #   include "protocol/lufa/descriptor.h"
-#   define REPORT_SIZE NKRO_EPSIZE
-#   define REPORT_KEYS (NKRO_EPSIZE - 2)
-#   define REPORT_BITS (NKRO_EPSIZE - 1)
+#   define KEYBOARD_REPORT_SIZE NKRO_EPSIZE
+#   define KEYBOARD_REPORT_KEYS (NKRO_EPSIZE - 2)
+#   define KEYBOARD_REPORT_BITS (NKRO_EPSIZE - 1)
 
 #else
-#   define REPORT_SIZE 8
-#   define REPORT_KEYS 6
+#   define KEYBOARD_REPORT_SIZE 8
+#   define KEYBOARD_REPORT_KEYS 6
 #endif
 
 
@@ -115,16 +116,16 @@ extern "C" {
  *
  */
 typedef union {
-    uint8_t raw[REPORT_SIZE];
+    uint8_t raw[KEYBOARD_REPORT_SIZE];
     struct {
         uint8_t mods;
         uint8_t reserved;
-        uint8_t keys[REPORT_KEYS];
+        uint8_t keys[KEYBOARD_REPORT_KEYS];
     };
 #ifdef NKRO_ENABLE
     struct {
         uint8_t mods;
-        uint8_t bits[REPORT_BITS];
+        uint8_t bits[KEYBOARD_REPORT_BITS];
     } nkro;
 #endif
 } __attribute__ ((packed)) report_keyboard_t;
@@ -158,6 +159,8 @@ typedef struct {
     (key == KC_AUDIO_VOL_DOWN   ?  AUDIO_VOL_DOWN : \
     (key == KC_MEDIA_NEXT_TRACK ?  TRANSPORT_NEXT_TRACK : \
     (key == KC_MEDIA_PREV_TRACK ?  TRANSPORT_PREV_TRACK : \
+    (key == KC_MEDIA_FAST_FORWARD ?  TRANSPORT_FAST_FORWARD : \
+    (key == KC_MEDIA_REWIND     ?  TRANSPORT_REWIND : \
     (key == KC_MEDIA_STOP       ?  TRANSPORT_STOP : \
     (key == KC_MEDIA_EJECT      ?  TRANSPORT_STOP_EJECT : \
     (key == KC_MEDIA_PLAY_PAUSE ?  TRANSPORT_PLAY_PAUSE : \
@@ -171,7 +174,7 @@ typedef struct {
     (key == KC_WWW_FORWARD      ?  AC_FORWARD : \
     (key == KC_WWW_STOP         ?  AC_STOP : \
     (key == KC_WWW_REFRESH      ?  AC_REFRESH : \
-    (key == KC_WWW_FAVORITES    ?  AC_BOOKMARKS : 0)))))))))))))))))))
+    (key == KC_WWW_FAVORITES    ?  AC_BOOKMARKS : 0)))))))))))))))))))))
 
 #ifdef __cplusplus
 }
