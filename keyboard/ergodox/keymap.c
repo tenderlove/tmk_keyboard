@@ -214,7 +214,7 @@ void action_function(keyrecord_t *event, uint8_t id, uint8_t opt)
 #define FN_ACTIONS_SIZE (sizeof(fn_actions) / sizeof(fn_actions[0]))
 
 /* translates key to keycode */
-uint8_t keymap_key_to_keycode(uint8_t layer, key_t key)
+uint8_t keymap_key_to_keycode(uint8_t layer, keypos_t key)
 {
     if (layer < KEYMAPS_SIZE) {
         return pgm_read_byte(&keymaps[(layer)][(key.row)][(key.col)]);

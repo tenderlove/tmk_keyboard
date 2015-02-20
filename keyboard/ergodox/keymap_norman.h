@@ -40,7 +40,7 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
            TAB,  Q,    W,    D,    F,    K, FN1,
            LCTL, A,    S,    E,    T,    G,
            LSFT, Z,    X,    C,    V,    B, NO,
-           GRV,  FN4, TAB, LALT, LGUI,
+           FN30,  FN4, TAB, LALT, LGUI,
 
                                             NO,  NO,
                                                 HOME,
@@ -50,7 +50,7 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
            UP,   J,    U,    R,    L,    SCLN, BSLS,
                  Y,    N,    I,    O,    H, QUOT,
            DOWN, P,    M,    COMM, DOT,  SLSH, RSFT,
-                       RGUI, MINS,  FN4, LBRC, RBRC,
+                       RGUI,  RALT, LBRC, RBRC, FN4,
            LEFT, RIGHT,
            PGUP,
            PGDN, FN27, BSPC
@@ -168,7 +168,7 @@ static const uint16_t PROGMEM fn_actions[] = {
     ACTION_MODS_TAP_KEY(MOD_LCTL, KC_A),            // FN28 - Control/esc on tap
 
     // Fancy tapping/toggling
-    ACTION_LAYER_TAP_KEY(1, KC_T),                  // FN3 - Layer 1 when holding T key
+    ACTION_LAYER_TAP_KEY(1, KC_GRV),                  // FN3 - Layer 1 when holding T key
 
 
 };
