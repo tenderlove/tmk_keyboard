@@ -38,7 +38,7 @@
 # To rebuild project do "make clean" then "make all".
 #----------------------------------------------------------------------------
 
-USB ?= /dev/cu.usbmodem1421
+USB ?= /dev/tty.usbmodem1421
 
 # Target file name (without extension).
 TARGET = atreus

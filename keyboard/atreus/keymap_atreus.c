@@ -6,19 +6,19 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KEYMAP(Q,    W,   D,    F,     K,               J,    U,    R,    L,    SCLN, \
          A,    S,   E,    T,     G,               Y,    N,    I,    O,    H, \
          Z,    X,   C,    V,     B,         FN20, P,    M,    COMM, DOT,  SLSH, \
-         LSFT, TAB, LALT, FN21,  SPC,  ENT,       BSPC, FN0,  MINS, QUOT, RSFT),
+         FN22, FN0, LALT, LGUI,  SPC,  ENT,       BSPC, FN21,  MINS, QUOT, FN23),
 
   /* 1: fn with software-dvorak-ized punctuation */
   KEYMAP(FN6,  FN7,  FN4,  FN5,  FN17,            UP,   7,    8,    9,  FN13, \
          FN8,  FN9,  FN2,  FN3,  GRV,             DOWN, 4,    5,    6,  FN1, \
          FN10, FN11, LBRC, RBRC, FN15,      TRNS, FN12, 1,    2,    3,  BSLS,  \
-         FN19, LEFT, RIGHT,TRNS, TRNS, TRNS,      TRNS, TRNS, DOT,  0,  EQL ), \
+         FN19, TRNS, TRNS, TRNS, TRNS, TRNS,      TRNS, TRNS, DOT,  0,  EQL ), \
 
   /* 1: fn with software-dvorak-ized punctuation */
   KEYMAP(NO,   BTN1, BTN2, BTN3,  NO,             UP,   7,    8,    9,  FN13, \
          NO,   WH_U, MS_U, WH_D,  NO,             DOWN, 4,    5,    6,  FN1, \
          NO,   MS_L, MS_D, MS_R,  NO,       TRNS, FN11, 1,    2,    3,  MINS,  \
-         NO,   LEFT,   NO,RIGHT, TRNS, TRNS,      TRNS, NO, DOT,  0,  EQL ) \
+         NO,   LEFT,   NO,RIGHT, TRNS, TRNS,      TRNS, NO, DOT,    TRNS,  EQL ) \
 };
 
 enum function_id {
@@ -73,5 +73,7 @@ const uint16_t PROGMEM fn_actions[] = {
   // other
   [19] = ACTION_FUNCTION(BOOTLOADER),
   [20] = ACTION_MODS_TAP_KEY(MOD_LCTL, KC_ESC),          // FN27 - Control/esc on tap
-  [21] = ACTION_MODS_TAP_KEY(MOD_LGUI, KC_TAB),          // FN27 - Control/esc on tap
+  [21] = ACTION_LAYER_TAP_KEY(1, KC_TAB),          // shift and right arrow
+  [22] = ACTION_MODS_TAP_KEY(MOD_LSFT, KC_LEFT),          // shift and left arrow
+  [23] = ACTION_MODS_TAP_KEY(MOD_RSFT, KC_RIGHT),          // shift and right arrow
 };
