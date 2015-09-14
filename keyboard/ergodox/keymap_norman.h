@@ -5,30 +5,25 @@
 
 static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-    /* TODO
-       - L1 push goes to wrong layer (mouse instead of characters)
-       - ~L2 stays in mouse layer
-    */
-
     /* Keymap 0: Norman Layer
      *
      * ,--------------------------------------------------.           ,--------------------------------------------------.
-     * |   =    |   1  |   2  |   3  |   4  |   5  | ESC  |           |      |   6  |   7  |   8  |   9  |   0  |   -    |
+     * |   =    |   1  |   2  |   3  |   4  |   5  | LEFT |           | RIGHT|   6  |   7  |   8  |   9  |   0  |   -    |
      * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
-     * | Tab    |   Q  |   W  |   D  |   F  |   K  |  Up  |           |  L0  |   J  |   U  |   R  |   L  |   :  |   \    |
+     * | Tab    |   Q  |   W  |   D  |   F  |   K  |  Up  |           |  Up  |   J  |   U  |   R  |   L  |   :  |   \    |
      * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
      * | BkSp   |   A  |   S  |   E  |   T  |   G  |------|           |------|   Y  |   N  |   I  |   O  |   H  |   '    |
-     * |--------+------+------+------+------+------|  Dn  |           |  L1  |------+------+------+------+------+--------|
-     * | LShift |   Z  |   X  |   C  |   V  |   B  |      |           |      |   P  |   M  |   ,  |   .  |   /  | RShitf |
+     * |--------+------+------+------+------+------|  Dn  |           |  Dn  |------+------+------+------+------+--------|
+     * | LShift |   Z  |   X  |   C  |   V  |   B  |      |           |      |   P  |   M  |   ,  |   .  |   /  | RShift |
      * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
-     *   | LGui |   `  |      | ~L1  |  ~L2 |                                       | ~L2  | ~L1  |   [  |   ]  | RGui |
+     *   |Grv/L1| ~L1  | TAB  | LAlt | LGui |                                       | RGui | RAlt |   [  |   ]  | ~L1  |
      *   `----------------------------------'                                       `----------------------------------'
      *                                        ,-------------.       ,-------------.
-     *                                        |  Lft | Rght |       |      |      |
+     *                                        |      |      |       | Left | Right|
      *                                 ,------|------|------|       |------+------+------.
      *                                 |      |      | Home |       | PgUp |      |      |
-     *                                 | LCtrl| LAlt |------|       |------| Enter| Space|
-     *                                 |      |      | End  |       | PgDn |      |      |
+     *                                 | Space| Enter|------|       |------| Ctrl/| Bspc |
+     *                                 |      |      | Mins |       | PgDn | Esc  |      |
      *                                 `--------------------'       `--------------------'
      */
 
@@ -36,17 +31,17 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // Norman Layer
 
     KEYMAP(
-           EQL,  1,    2,    3,    4,    5, ESC,
-           TAB,  Q,    W,    D,    F,    K, FN1,
+           EQL,  1,    2,    3,    4,    5, LEFT,
+           TAB,  Q,    W,    D,    F,    K, UP,
            LCTL, A,    S,    E,    T,    G,
-           LSFT, Z,    X,    C,    V,    B, NO,
+           LSFT, Z,    X,    C,    V,    B, DOWN,
            FN30,  FN4, TAB, LALT, LGUI,
 
                                             NO,  NO,
                                                 HOME,
                                       SPC, ENT, MINS,
            //RIGHT
-           NO,   6,    7,    8,    9,    0,    MINS,
+           RIGHT,6,    7,    8,    9,    0,    MINS,
            UP,   J,    U,    R,    L,    SCLN, BSLS,
                  Y,    N,    I,    O,    H,    QUOT,
            DOWN, P,    M,    COMM, DOT,  SLSH, RSFT,
@@ -56,12 +51,33 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
            PGDN, FN27, BSPC
            ),
 
+    /* Keymap 1: Symbol Layer
+     *
+     * ,--------------------------------------------------.           ,--------------------------------------------------.
+     * |  Flash |  F1  |  F2  |  F3  |  F4  |  F5  |      |           |      |  F6  |  F7  |  F8  |  F9  |  F10 |   F11  |
+     * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
+     * |        |   !  |   @  |   {  |   }  |   |  |      |           |      |   Up |   7  |   8  |   9  |   *  |   F12  |
+     * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+     * | :      |   #  |   $  |   (  |   )  |   `  |------|           |------| Down |   4  |   5  |   6  |   +  |        |
+     * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+     * |        |   %  |   ^  |   [  |   ]  |   ~  |      |           |      |   &  |   1  |   2  |   3  |   \  |        |
+     * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
+     *   |      |      |      |      |      |                                       |      |    . |   0  |   =  |      |
+     *   `----------------------------------'                                       `----------------------------------'
+     *                                        ,-------------.       ,-------------.
+     *                                        |      |      |       |      |      |
+     *                                 ,------|------|------|       |------+------+------.
+     *                                 |      |      |      |       |      |      |      |
+     *                                 |      |      |------|       |------|      |      |
+     *                                 |      |      |      |       |      |      |      |
+     *                                 `--------------------'       `--------------------'
+     */
     // SYMBOLS
     KEYMAP(
-           FN0,  F1,   F2,   F3,   F4,   F5,   ESC,
-           TRNS, FN7,  FN8,  FN23, FN24, FN18, FN2,
+           FN0,  F1,   F2,   F3,   F4,   F5,   TRNS,
+           TRNS, FN7,  FN8,  FN23, FN24, FN18, TRNS,
            FN22, FN9,  FN10, FN15, FN16, GRV,
-           TRNS, FN11, FN12, LBRC, RBRC, FN17, FN1,
+           TRNS, FN11, FN12, LBRC, RBRC, FN17, TRNS,
            TRNS, TRNS, TRNS, TRNS, TRNS,
 
                                                TRNS, TRNS,
@@ -70,58 +86,13 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         // right hand
            TRNS, F6,   F7,   F8,   F9,   F10,   F11,
            UP,    UP,       7,   8,    9,    FN14, F12,
-                  DOWN,     4,   5,    6,    FN26, FN30,
+                  DOWN,     4,   5,    6,    FN26, TRNS,
            DOWN,  FN13,     1,   2,    3,    BSLS, TRNS,
                         TRNS,  DOT,    0,    EQL, TRNS,
            TRNS, TRNS,
            TRNS,
            TRNS, TRNS, TRNS
     ),
-    KEYMAP(  // Layer2: Mouse Left/ Arrows Right
-        // left hand
-           NO,   NO,   BTN1, BTN2, BTN3, NO,   TRNS,
-           NO,   NO,   WH_U, MS_U, WH_D, NO,   NO,
-           NO,   NO,   MS_L, MS_D, MS_R, NO,
-           NO,   NO,   BTN1, BTN2, BTN3, NO,   FN4,
-           NO,   NO,   NO,   NO,   NO,
-                                               NO,   NO,
-                                                     NO,
-                                         NO,   NO,   NO,
-        // right hand
-           NO,   NO,   BTN1, BTN2, BTN3, NO,   NO,
-           FN5,  INS,  HOME, UP,   PGUP, NO,   NO,
-                 DEL,  LEFT, DOWN, RGHT, NO,   NO,
-           NO,   NO,   END,  DOWN, PGDN, NO,   NO,
-                       TRNS, TRNS, NO,   NO,   NO,
-           NO,   NO,
-           NO,
-           NO,   TRNS,   NO
-    ),
-
-    /* KEYMAP(  // LayerN: fully transparent */
-    /*     // left hand */
-    /*        TRNS, TRNS, TRNS, TRNS, TRNS, TRNS, TRNS,  */
-    /*        TRNS, TRNS, TRNS, TRNS, TRNS, TRNS, TRNS,  */
-    /*        TRNS, TRNS, TRNS, TRNS, TRNS, TRNS,  */
-    /*        TRNS, TRNS, TRNS, TRNS, TRNS, TRNS, TRNS,  */
-    /*        TRNS, TRNS, TRNS, TRNS, TRNS,  */
-    /*                                            TRNS, TRNS,  */
-    /*                                                  TRNS,  */
-    /*                                      TRNS, TRNS, TRNS, */
-    /*     // right hand */
-    /*        TRNS, TRNS, TRNS, TRNS, TRNS, TRNS, TRNS,  */
-    /*        TRNS, TRNS, TRNS, TRNS, TRNS, TRNS, TRNS,  */
-    /*              TRNS, TRNS, TRNS, TRNS, TRNS, TRNS,  */
-    /*        TRNS, TRNS, TRNS, TRNS, TRNS, TRNS, TRNS,  */
-    /*                    TRNS, TRNS, TRNS, TRNS, TRNS,  */
-    /*        TRNS, TRNS,  */
-    /*        TRNS,  */
-    /*        TRNS, TRNS, TRNS */
-    /* ), */
-
-
-    // BASE LAYERS
-
 };
 
 /* id for user defined functions */
@@ -165,7 +136,7 @@ static const uint16_t PROGMEM fn_actions[] = {
 
     ACTION_MODS_TAP_KEY(MOD_LCTL, KC_ESC),          // FN27 - Control/esc on tap
     ACTION_MODS_TAP_KEY(MOD_LSFT, KC_Z),            // FN28 - Control/esc on tap
-    ACTION_MODS_TAP_KEY(MOD_LCTL, KC_A),            // FN28 - Control/esc on tap
+    ACTION_MODS_TAP_KEY(MOD_LCTL, KC_A),            // FN29 - Control/esc on tap
 
     // Fancy tapping/toggling
     ACTION_LAYER_TAP_KEY(1, KC_GRV),                  // FN3 - Layer 1 when holding T key
