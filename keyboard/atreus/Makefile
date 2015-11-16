@@ -44,13 +44,14 @@ USB ?= /dev/tty.usbmodem1411
 TARGET = atreus
 
 # Directory common source filess exist
-TOP_DIR = ../..
+TMK_DIR = ../../tmk_core
 
 # Directory keyboard dependent files exist
 TARGET_DIR = .
 
-# project specific files
-SRC =	keymap_common.c \
+
+# List C source files here. (C dependencies are automatically generated.)
+SRC +=	keymap_common.c \
 	matrix.c \
 	led.c
 
@@ -100,14 +101,14 @@ ARCH = AVR8
 #     CPU clock adjust registers or the clock division fuses), this will be equal to F_CPU.
 F_USB = $(F_CPU)
 
-# Interrupt driven control endpoint task(+60)
-OPT_DEFS += -DINTERRUPT_CONTROL_ENDPOINT
+# Interrupt driven control endpoint task
+#OPT_DEFS += -DINTERRUPT_CONTROL_ENDPOINT
 
 
 # Boot Section Size in *bytes*
 #   Teensy halfKay   512
 #   Teensy++ halfKay 1024
-#   Atmel DFU loader 4096
+#   Atmel DFU loader 4096	(TMK Alt Controller)
 #   LUFA bootloader  4096
 #   USBaspLoader     2048
 OPT_DEFS += -DBOOTLOADER_SIZE=4096
@@ -132,12 +133,19 @@ OPT_DEFS += -DNO_SUSPEND_POWER_DOWN
 
 # Search Path
 VPATH += $(TARGET_DIR)
-VPATH += $(TOP_DIR)
+VPATH += $(TMK_DIR)
+
+include $(TMK_DIR)/protocol/lufa.mk
+include $(TMK_DIR)/common.mk
+include $(TMK_DIR)/rules.mk
+
+debug-on: EXTRAFLAGS += -DDEBUG -DDEBUG_ACTION
+debug-on: all
+
+debug-off: EXTRAFLAGS += -DNO_DEBUG -DNO_PRINT
+debug-off: OPT_DEFS := $(filter-out -DCONSOLE_ENABLE,$(OPT_DEFS))
+debug-off: all
 
 upload: $(TARGET).hex
 	while [ ! -r $(USB) ]; do sleep 1; done; \
-	avrdude -p $(MCU) -c avr109 -U flash:w:$(TARGET).hex -P $(USB)
-
-include $(TOP_DIR)/protocol/lufa.mk
-include $(TOP_DIR)/common.mk
-include $(TOP_DIR)/rules.mk
+	  avrdude -p $(MCU) -c avr109 -U flash:w:$(TARGET).hex -P $(USB)
