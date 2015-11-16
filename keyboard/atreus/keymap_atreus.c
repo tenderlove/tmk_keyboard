@@ -5,7 +5,7 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /* 0: Norman */
   KEYMAP(Q,    W,   D,    F,     K,               J,    U,    R,    L,    SCLN, \
          A,    S,   E,    T,     G,               Y,    N,    I,    O,    H, \
-         Z,    X,   C,    V,     B,         FN20, P,    M,    COMM, DOT,  SLSH, \
+         FN24,    X,   C,    V,     B,         FN20, P,    M,    COMM, DOT,  FN25, \
          FN22, FN0, LALT, LGUI,  SPC,  ENT,       BSPC, FN21,  MINS, QUOT, FN23),
 
   /* 1: fn with software-dvorak-ized punctuation */
@@ -74,6 +74,8 @@ const uint16_t PROGMEM fn_actions[] = {
   [19] = ACTION_FUNCTION(BOOTLOADER),
   [20] = ACTION_MODS_TAP_KEY(MOD_LCTL, KC_ESC),          // FN27 - Control/esc on tap
   [21] = ACTION_LAYER_TAP_KEY(1, KC_TAB),          // shift and right arrow
-  [22] = ACTION_MODS_TAP_KEY(MOD_LSFT, KC_LEFT),          // shift and left arrow
-  [23] = ACTION_MODS_TAP_KEY(MOD_RSFT, KC_RIGHT),          // shift and right arrow
+  [22] = ACTION_LAYER_MOMENTARY(1),          // shift and left arrow
+  [23] = ACTION_LAYER_MOMENTARY(1),          // shift and right arrow
+  [24] = ACTION_MODS_TAP_KEY(MOD_LSFT, KC_Z),          // shift and right arrow
+  [25] = ACTION_MODS_TAP_KEY(MOD_RSFT, KC_SLSH),          // shift and right arrow
 };
