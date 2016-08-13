@@ -13,7 +13,7 @@ For an easy-to-read version of this document and the repository, check out [http
 * [Planck](/keyboards/planck/)
 * [Preonic](/keyboards/preonic/)
 * [Atomic](/keyboards/atomic/)
-* [ErgoDox EZ](/keyboards/ergodox_ez/)
+* [ErgoDox EZ](/keyboards/ergodox/ez/)
 * [Clueboard](/keyboards/clueboard/)
 * [Cluepad](/keyboards/cluepad/)
 
